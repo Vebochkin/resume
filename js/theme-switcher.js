@@ -37,5 +37,22 @@ function animate({timing, draw, duration}) {
   
     });
   }
+// Функция, которая проверяет, когда страница долистана до самого низа
+function handleScroll() {
+    const hiddenText = document.getElementById('hidden-text');
+    
+    if (isBottomReached()) {
+        hiddenText.classList.remove('hidden');
+    } else {
+        hiddenText.classList.add('hidden'); // Скрываем текст, если не достигли низа
+    }
+}
 
+// Функция для проверки, долистана ли страница до самого низа
+function isBottomReached() {
+    return window.innerHeight + window.scrollY >= document.body.offsetHeight;
+}
+
+// Слушаем событие прокрутки страницы
+window.addEventListener('scroll', handleScroll);
 getThemeOnLoad();
