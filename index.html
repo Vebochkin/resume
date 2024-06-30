@@ -101,6 +101,66 @@
   <footer>
     <p>Resume by Vebochkin</p>
 </footer>
+<script>
+  function animate({timing, draw, duration}) {
+    let start = performance.now();
+  
+    requestAnimationFrame(function animate(time) {
+      let timeFraction = (time - start) / duration;
+      if (timeFraction > 1) timeFraction = 1;
+  
+      let progress = timing(timeFraction);
+  
+      draw(progress);
+  
+      if (timeFraction < 1) {
+        requestAnimationFrame(animate);
+      }
+    });
+  }
+  
+   
+  function linear(timeFraction) {
+    return timeFraction;
+  }
+  
+   
+  function draw(progress) {
+    const elements = document.querySelectorAll('h1, p, li, span, strong, a'); 
+  
+    elements.forEach(element => {
+      element.style.opacity = progress;  
+    });
+  }
+  
+   
+  animate({
+    timing: linear,
+    draw: draw,
+    duration: 1000  
+  });
+  </script>
+  <script>
+     
+    function hoverAnimation() {
+      const elements = document.querySelectorAll('h1, p, li, span, strong, a');
+    
+      elements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+          
+          element.classList.add('hovered');  
+        });
+    
+        element.addEventListener('mouseleave', function() {
+           
+          element.classList.remove('hovered'); 
+        });
+      });
+    }
+    
+     
+    hoverAnimation();
+    </script>
 </body>
 <script src="js/theme-switcher.js"></script>
 </html>
